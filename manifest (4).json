@@ -1,0 +1,11 @@
+{
+  "description": "متابعة سير المعاملات",
+  "background_color": "#0c1d5f",
+  "theme_color": "#11306d",
+  "start_url": "https://qqwewerty.github.io/-/",
+  "dir": "rtl",
+  "scope": "/",
+  "lang": "ar",
+  "orientation": "portrait",
+  "display": "standalone"
+}
