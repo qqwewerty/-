@@ -1,0 +1,566 @@
+/* --- أنماط شاشة الترحيب --- */
+#splashScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #011223; /* لون الخلفية أزرق داكن قريب من الأسود */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.7s ease-out, visibility 0.7s ease-out;
+}
+
+#splashScreen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.splash-content {
+    text-align: center;
+    color: #C0C0C0; /* لون رصاصي فاتح */
+    position: relative;
+    z-index: 2001;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* تبدأ العناصر من الأعلى */
+    height: 100%;
+    width: 100%;
+    padding-top: 15%; /* مسافة من الأعلى لدفع الشعار والنص الأول للأسفل */
+    padding-bottom: 5%; /* مسافة من الأسفل للنص الأخير */
+    box-sizing: border-box;
+}
+
+/* نمط لصورة الشعار الرئيسي */
+#splashLogo {
+    width: 90%; /* القيمة التي قمت بتعديلها لجعل الصورة أعرض */
+    max-width: 400px; /* يمكن تحديد أقصى عرض للحفاظ على تناسق الحجم على الشاشات الكبيرة */
+    height: auto;
+    opacity: 0.6; /* تخفيف عتامة الشعار ليظهر شفافًا ولا يؤثر على وضوح الكلمة */
+    margin-bottom: 0px; 
+    z-index: 2; /* تأكد أن الشعار يظهر فوق كل شيء آخر */
+    transform: translateX(-10px); /* <<< هذه هي الخاصية الجديدة التي يمكنك تعديلها لليسار أو اليمين */
+    /* قيمة موجبة (مثلاً 10px) تحرك لليمين، قيمة سالبة (مثلاً -10px) تحرك لليسار */
+}
+
+.splash-text {
+    font-family: 'zahra', sans-serif;
+    color: #C0C0C0;
+    text-shadow: 0 0 5px #C0C0C0, 0 0 10px #E0E0E0;
+    white-space: nowrap;
+    position: relative; /* لضمان أنها جزء من تدفق Flexbox */
+}
+
+#splashText1 {
+    font-size: 2.5em; /* حجم نص "أمانة بغداد" */
+    letter-spacing: 0.5em;
+    margin-top: -25px; /* القيمة التي قمت بتعديلها لرفع الكلمة */
+    opacity: 1; /* تأكد من ظهورها فوراً */
+}
+
+/* صورة الخلفية الدائرية التي تظهر خلف "دائرة التصاميم" */
+#middleBackgroundLogo {
+    position: absolute;
+    width: 500px; /* تم زيادة حجم الصورة الدائرية */
+    height: auto;
+    opacity: 0.1; /* شفافية عالية جداً لتبدو كخلفية خفيفة */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1; /* للتأكد أنها خلف النصوص ولكن أمام الخلفية السوداء */
+}
+
+#splashText2 {
+    font-size: 3.5em; /* حجم نص "دائرة التصاميم" */
+    position: absolute; /* لجعلها في المنتصف تماماً فوق الصورة الدائرية */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0; /* إزالة الهوامش التلقائية */
+    opacity: 0; /* تبدأ مخفية */
+    animation: fadeIn 1.5s ease-out 2s forwards; /* تظهر بعد 2 ثانية */
+}
+
+#splashText3 {
+    font-size: 2.2em; /* حجم نص "المدير العام / هدى الحسني" */
+    font-family: 'zahra', sans-serif;
+    text-shadow: 0 0 5px #C0C0C0;
+    position: absolute; /* لجعلها في الأسفل تماماً */
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    text-align: center;
+    max-width: 80%;
+    z-index: 3; /* لضمان ظهور النص فوق كل شيء */
+    opacity: 0; /* تبدأ مخفية */
+    animation: engraveText 3s ease-out 4s forwards; /* تظهر بعد 4 ثوانٍ */
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes engraveText {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px) translateX(-50%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) translateX(-50%);
+    }
+}
+
+/* --- أنماط التطبيق الرئيسي وشاشة اختيار السنة --- */
+body {
+    font-family: 'zahra', sans-serif;
+    margin: 0;
+    color: #fff;
+    overflow: hidden;
+    background-color: #001122; /* لون خلفية body */
+}
+
+#mainApp, #yearSelectionScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1A2B3C; /* لون خلفية (أفتح قليلاً من شاشة الترحيب) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+}
+
+@keyframes fadeInVisible {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+    }
+    1% {
+        visibility: visible;
+    }
+    100% {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+#mainApp.visible-app, #yearSelectionScreen.visible-screen {
+    animation: fadeInVisible 0.7s ease-in forwards;
+}
+
+.container {
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+}
+
+h1 {
+    font-family: 'zahra', sans-serif;
+    color: #ffd700;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #ffd700;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+label {
+    font-family: 'zahra', sans-serif;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+    color: #ffd700;
+}
+
+input[type="text"], select {
+    font-family: 'zahra', sans-serif;
+    padding: 10px;
+    border: 2px solid #ffd700;
+    border-radius: 4px;
+    flex-grow: 1;
+    color: #333;
+    background-image: linear-gradient(to right, #FFD700, #EEE8AA);
+    background-clip: padding-box;
+    width: 200px;
+    box-shadow: 0 0 10px #ffd700;
+    text-align: right;
+    direction: rtl; /* لجعل النص يبدأ من اليمين في الـ select أيضاً */
+}
+
+select {
+    appearance: none; /* لإزالة النمط الافتراضي للـ select في بعض المتصفحات */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: linear-gradient(to right, #FFD700, #EEE8AA), url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2C118.8L146.2%2C259.6L5.4%2C118.8c-3.1-3.1-3.1-8.2%2C0-11.3s8.2-3.1%2C11.3%2C0l129.5%2C129.5l129.5-129.5c3.1-3.1%2C8.2-3.1%2C11.3%2C0S290.1%2C115.7%2C287%2C118.8z%22%2F%3E%3C%2Fsvg%3E'); /* سهم مخصص للأسفل */
+    background-repeat: no-repeat;
+    background-position: left 10px top 50%;
+    background-size: 12px;
+    padding-left: 30px; /* لإفساح المجال للسهم */
+}
+
+button {
+    font-family: 'zahra', sans-serif;
+    background-color: #5c6bc0;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #3f51b5;
+}
+
+#resultContainer {
+    font-family: 'zahra', sans-serif;
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #a9b77c;
+    border-radius: 4px;
+    background-color: rgba(220, 237, 200, 0.1);
+    color: #fff;
+    min-height: 40px;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.not-found {
+    font-family: 'zahra', sans-serif;
+    color: #ffcdd2;
+    font-weight: bold;
+}
+
+.loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #ffd700;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* --- أنماط الأشكال المتحركة --- */
+.shape {
+    position: absolute;
+    background-color: rgba(220, 237, 200, 0.5);
+    border-radius: 4px;
+    opacity: 0;
+    animation: floatShape 12s linear infinite;
+    box-shadow: 0 0 10px rgba(220, 237, 200, 0.8);
+    z-index: 0;
+}
+
+.square {
+    width: 1.2em;
+    height: 1.2em;
+}
+.circle {
+    width: 1.2em;
+    height: 1.2em;
+    border-radius: 50%;
+}
+.triangle {
+    width: 0;
+    height: 0;
+    border-left: 0.6em solid transparent;
+    border-right: 0.6em solid transparent;
+    border-bottom: 1.04em solid rgba(220, 237, 200, 0.5);
+    background-color: transparent !important;
+    box-shadow: 0 0 10px rgba(220, 237, 200, 0.8);
+}
+.star {
+    color: rgba(255, 215, 0, 0.5);
+    font-size: 1.5em;
+    line-height: 1;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    background-color: transparent !important;
+}
+.hexagon {
+    width: 1.04em;
+    height: 0.6em;
+    background-color: rgba(220, 237, 200, 0.5);
+    position: relative;
+    border-radius: 0.3em;
+    box-shadow: 0 0 10px rgba(220, 237, 200, 0.8);
+}
+.hexagon::before,
+.hexagon::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    border-left: 0.52em solid transparent;
+    border-right: 0.52em solid transparent;
+    background-color: transparent !important;
+}
+.hexagon::before {
+    bottom: 100%;
+    border-bottom: 0.3em solid rgba(220, 237, 200, 0.5);
+}
+.hexagon::after {
+    top: 100%;
+    border-top: 0.3em solid rgba(220, 237, 200, 0.5);
+}
+
+/* مواقع الأشكال (تبقى كما هي من كودك الأصلي) */
+.shape:nth-child(1) {
+    top: 10%;
+    left: 15%;
+    animation-delay: 0s;
+}
+.shape:nth-child(2) {
+    top: 30%;
+    right: 20%;
+    animation-delay: 2s;
+    width: 0.8em;
+    height: 0.8em;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(220, 237, 200, 0.7);
+}
+.shape:nth-child(3) {
+    bottom: 10%;
+    left: 30%;
+    animation-delay: 4s;
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(220, 237, 200, 0.9);
+}
+.shape:nth-child(4) {
+    bottom: 30%;
+    right: 10%;
+    animation-delay: 6s;
+    width: 1.5em;
+    height: 1.5em;
+    box-shadow: 0 0 15px rgba(220, 237, 200, 1);
+}
+.shape:nth-child(5) {
+    top: 50%;
+    left: 60%;
+    animation-delay: 8s;
+    width: 0.6em;
+    height: 0.6em;
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(220, 237, 200, 0.6);
+}
+.shape:nth-child(6) {
+    top: 20%;
+    right: 5%;
+    animation-delay: 1s;
+    box-shadow: 0 0 11px rgba(220, 237, 200, 0.85);
+}
+.shape:nth-child(7) {
+    bottom: 5%;
+    left: 10%;
+    animation-delay: 3s;
+    border-radius: 50%;
+    width: 1em;
+    height: 1em;
+    box-shadow: 0 0 9px rgba(220, 237, 200, 0.75);
+}
+.shape:nth-child(8) {
+    top: 70%;
+    right: 30%;
+    animation-delay: 5s;
+    border-left-width: 0.5em;
+    border-right-width: 0.5em;
+    border-bottom: 0.87em solid rgba(220, 237, 200, 0.5);
+    box-shadow: 0 0 13px rgba(220, 237, 200, 0.95);
+}
+.shape:nth-child(9) {
+    bottom: 40%;
+    left: 70%;
+    animation-delay: 7s;
+    font-size: 1.2em;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.9);
+}
+.shape:nth-child(10) {
+    top: 5%;
+    right: 40%;
+    animation-delay: 9s;
+    box-shadow: 0 0 7px rgba(220, 237, 200, 0.65);
+}
+.shape:nth-child(11) {
+    bottom: 60%;
+    left: 5%;
+    animation-delay: 0.5s;
+    border-radius: 50%;
+    width: 0.7em;
+    height: 0.7em;
+    box-shadow: 0 0 8px rgba(220, 237, 200, 0.7);
+}
+.shape:nth-child(12) {
+    top: 80%;
+    right: 60%;
+    animation-delay: 2.5s;
+    border-left-width: 0.8em;
+    border-right-width: 0.8em;
+    border-bottom: 1.39em solid rgba(220, 237, 200, 0.5);
+    box-shadow: 0 0 14px rgba(220, 237, 200, 1);
+}
+.shape:nth-child(13) {
+    bottom: 20%;
+    left: 80%;
+    animation-delay: 4.5s;
+    font-size: 1.8em;
+    text-shadow: 0 0 12px rgba(255, 215, 0, 1);
+}
+.shape:nth-child(14) {
+    top: 40%;
+    left: 5%;
+    animation-delay: 6.5s;
+    box-shadow: 0 0 10px rgba(220, 237, 200, 0.8);
+}
+.shape:nth-child(15) {
+    bottom: 70%;
+    right: 15%;
+    animation-delay: 8.5s;
+    border-radius: 50%;
+    width: 1.3em;
+    height: 1.3em;
+    box-shadow: 0 0 11px rgba(220, 237, 200, 0.85);
+}
+.shape:nth-child(16) {
+    top: 15%;
+    right: 70%;
+    animation-delay: 10.5s;
+    border-left-width: 0.3em;
+    border-right-width: 0.3em;
+    border-bottom: 0.52em solid rgba(220, 237, 200, 0.5);
+    box-shadow: 0 0 7px rgba(220, 237, 200, 0.65);
+}
+.shape:nth-child(17) {
+    bottom: 30%;
+    left: 40%;
+    animation-delay: 11.5s;
+    font-size: 1em;
+    text-shadow: 0 0 9px rgba(255, 215, 0, 0.8);
+}
+.shape:nth-child(18) {
+    top: 60%;
+    right: 5%;
+    animation-delay: 3.5s;
+    box-shadow: 0 0 12px rgba(220, 237, 200, 0.9);
+}
+.shape:nth-child(19) {
+    bottom: 15%;
+    left: 50%;
+    animation-delay: 5.5s;
+    width: 0.9em;
+    height: 0.9em;
+    box-shadow: 0 0 8px rgba(220, 237, 200, 0.7);
+}
+.shape:nth-child(20) {
+    top: 85%;
+    right: 25%;
+    animation-delay: 7.5s;
+    border-radius: 50%;
+    width: 1.6em;
+    height: 1.6em;
+    box-shadow: 0 0 13px rgba(220, 237, 200, 0.95);
+}
+.shape:nth-child(21) {
+    bottom: 50%;
+    left: 20%;
+    animation-delay: 9.5s;
+    border-left-width: 0.6em;
+    border-right-width: 0.6em;
+    border-bottom: 1.04em solid rgba(220, 237, 200, 0.5);
+    box-shadow: 0 0 11px rgba(220, 237, 200, 0.85);
+}
+.shape:nth-child(22) {
+    top: 25%;
+    right: 80%;
+    animation-delay: 11s;
+    font-size: 1.4em;
+    text-shadow: 0 0 11px rgba(255, 215, 0, 0.95);
+}
+.shape:nth-child(23) {
+    bottom: 5%;
+    right: 50%;
+    animation-delay: 1s;
+    box-shadow: 0 0 10px rgba(220, 237, 200, 0.8);
+}
+.shape:nth-child(24) {
+    top: 75%;
+    left: 35%;
+    animation-delay: 3s;
+    width: 0.7em;
+    height: 0.7em;
+    box-shadow: 0 0 7px rgba(220, 237, 200, 0.65);
+}
+.shape:nth-child(25) {
+    bottom: 65%;
+    right: 75%;
+    animation-delay: 5s;
+    border-radius: 50%;
+    width: 1.1em;
+    height: 1.1em;
+    box-shadow: 0 0 9px rgba(220, 237, 200, 0.75);
+}
+.shape:nth-child(26) {
+    top: 35%;
+    left: 85%;
+    animation-delay: 7s;
+    border-left-width: 0.4em;
+    border-right-width: 0.4em;
+    border-bottom: 0.69em solid rgba(220, 237, 200, 0.5);
+    box-shadow: 0 0 8px rgba(220, 237, 200, 0.7);
+}
+.shape:nth-child(27) {
+    bottom: 25%;
+    right: 5%;
+    animation-delay: 9s;
+    font-size: 1.6em;
+    text-shadow: 0 0 12px rgba(255, 215, 0, 1);
+}
+.shape:nth-child(28) {
+    top: 55%;
+    left: 10%;
+    animation-delay: 11s;
+    box-shadow: 0 0 10px rgba(220, 237, 200, 0.8);
+}
+@keyframes floatShape {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(30px) translateX(30px) rotate(180deg);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(0) translateX(0) rotate(360deg);
+        opacity: 0;
+    }
+}
