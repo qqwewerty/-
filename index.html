@@ -1,0 +1,112 @@
+
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دائرة التصاميم</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="splashScreen">
+        <div class="splash-content">
+            <img id="splashLogo" src="https://files.catbox.moe/w2wq74.png" alt="شعار أمانة بغداد">
+            <h1 id="splashText1" class="splash-text">أمانة بغداد</h1>
+            <img id="middleBackgroundLogo" src="https://drive.google.com/thumbnail?id=1hhqGbIn5CA4_euuS52id_INzOLFs_YYy&sz=s2048" alt="خلفية دائرة التصاميم">
+            <h2 id="splashText2" class="splash-text">دائرة التصاميم</h2>
+            <p id="splashText3" class="splash-text handwriting">المدير العام / هدى الحسني</p>
+        </div>
+    </div>
+
+    <div id="yearSelectionScreen" style="opacity: 0; visibility: hidden;">
+        <div class="shape square"></div>
+        <div class="shape circle"></div>
+        <div class="shape circle"></div>
+        <div class="shape square"></div>
+        <div class="shape circle"></div>
+        <div class="shape square"></div>
+        <div class="shape circle"></div>
+        <div class="shape triangle"></div>
+        <div class="shape star">*</div>
+        <div class="shape square"></div>
+        <div class="shape circle"></div>
+        <div class="shape triangle"></div>
+        <div class="shape star">*</div>
+        <div class="shape hexagon"></div>
+        <div class="shape square"></div>
+        <div class="shape circle"></div>
+        <div class="shape triangle"></div>
+        <div class="shape star">*</div>
+        <div class="shape hexagon"></div>
+        <div class="shape square"></div>
+        <div class="shape circle"></div>
+        <div class="shape triangle"></div>
+        <div class="shape star">*</div>
+        <div class="shape hexagon"></div>
+        <div class="shape square"></div>
+        <div class="shape circle"></div>
+        <div class="shape triangle"></div>
+        <div class="shape star">*</div>
+        <div class="shape hexagon"></div>
+        
+        <div class="container">
+            <h1>دائرة التصاميم</h1>
+            <div class="input-group">
+                <label for="yearSelect">اختر السنة:</label>
+                <select id="yearSelect">
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option> <option value="2025" selected>2025</option>
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                </select>
+                <button id="selectYearButton">تأكيد</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="mainApp" style="opacity: 0; visibility: hidden;">
+        <div class="shape square"></div>
+        <div class="shape circle"></div>
+        <div class="shape circle"></div>
+        <div class="shape square"></div>
+        <div class="shape circle"></div>
+        <div class="shape square"></div>
+        <div class="shape circle"></div>
+        <div class="shape triangle"></div>
+        <div class="shape star">*</div>
+        <div class="shape square"></div>
+        <div class="shape circle"></div>
+        <div class="shape triangle"></div>
+        <div class="shape star">*</div>
+        <div class="shape hexagon"></div>
+        <div class="shape square"></div>
+        <div class="shape circle"></div>
+        <div class="shape triangle"></div>
+        <div class="shape star">*</div>
+        <div class="shape hexagon"></div>
+        <div class="shape square"></div>
+        <div class="shape circle"></div>
+        <div class="shape triangle"></div>
+        <div class="shape star">*</div>
+        <div class="shape hexagon"></div>
+        <div class="shape square"></div>
+        <div class="shape circle"></div>
+        <div class="shape triangle"></div>
+        <div class="shape star">*</div>
+        <div class="shape hexagon"></div>
+
+        <div class="container">
+            <h1>دائرة التصاميم</h1>
+            <div class="input-group">
+                <label for="searchInput">أدخل رقم الوارد:</label>
+                <input type="text" id="searchInput" placeholder="أدخل الرقم">
+                <button id="searchButton">بحث</button>
+            </div>
+            <div id="resultContainer"></div>
+            <div id="loader" class="loader" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
